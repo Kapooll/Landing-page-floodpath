@@ -29,9 +29,8 @@
                 <a href="#solucao">Como Funciona</a>
                 <a href="#beneficios">Recursos</a>
                 <a href="#faq">Dúvidas</a>
+                <a href="#processo-maquete">Maquete</a>
                 <a href="#equipe">Equipe</a>
-                <a href="https://rafaela0011.github.io/FloodPath-atualiza-es-07-08/"
-                    class="btn-acessar-sistema link-sistema" target="_blank">Acessar Site</a>
             </nav>
         </header>
     </div>
@@ -49,11 +48,10 @@
                     tranquilidade.
                 </p>
 
-                <!-- BOTÃO PARA ACESSAR O SISTEMA -->
                 <div class="hero-cta">
                     <a href="https://rafaela0011.github.io/FloodPath-atualiza-es-07-08/"
                         class="btn-primario link-sistema" target="_blank">
-                        Ir para o Site<i class="fa-solid fa-arrow-right"></i>
+                        Ir para o Site <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
 
@@ -87,77 +85,61 @@
 
                         <!-- Mapa Vetorial SVG com o Desvio -->
                         <svg class="map-svg" viewBox="0 0 300 480" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Fundo do Mapa (Blocos da cidade) -->
+                            <!-- Fundo do Mapa -->
                             <rect width="300" height="480" fill="#eef2f6" />
 
-                            <!-- Linha 1 de Quadras -->
                             <rect x="15" y="20" width="27" height="82" rx="6" fill="#e2e8f0" />
                             <rect x="58" y="20" width="84" height="82" rx="6" fill="#e2e8f0" />
                             <rect x="158" y="20" width="84" height="82" rx="6" fill="#e2e8f0" />
                             <rect x="258" y="20" width="27" height="82" rx="6" fill="#e2e8f0" />
 
-                            <!-- Linha 2 de Quadras -->
                             <rect x="15" y="118" width="27" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="58" y="118" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="158" y="118" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="258" y="118" width="27" height="64" rx="6" fill="#e2e8f0" />
 
-                            <!-- Linha 3 de Quadras (Onde ocorre o alagamento) -->
                             <rect x="15" y="198" width="27" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="58" y="198" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="158" y="198" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="258" y="198" width="27" height="64" rx="6" fill="#e2e8f0" />
 
-                            <!-- Linha 4 de Quadras -->
                             <rect x="15" y="278" width="27" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="58" y="278" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="158" y="278" width="84" height="64" rx="6" fill="#e2e8f0" />
                             <rect x="258" y="278" width="27" height="64" rx="6" fill="#e2e8f0" />
 
-                            <!-- Linha 5 de Quadras -->
                             <rect x="15" y="358" width="27" height="122" rx="6" fill="#e2e8f0" />
                             <rect x="58" y="358" width="84" height="122" rx="6" fill="#e2e8f0" />
                             <rect x="158" y="358" width="84" height="122" rx="6" fill="#e2e8f0" />
                             <rect x="258" y="358" width="27" height="122" rx="6" fill="#e2e8f0" />
 
-                            <!-- Malha Rodoviária (Ruas Brancas Horizontais) -->
                             <path d="M 0,110 L 300,110" stroke="#ffffff" stroke-width="16" />
                             <path d="M 0,190 L 300,190" stroke="#ffffff" stroke-width="16" />
                             <path d="M 0,270 L 300,270" stroke="#ffffff" stroke-width="16" />
                             <path d="M 0,350 L 300,350" stroke="#ffffff" stroke-width="16" />
 
-                            <!-- Malha Rodoviária (Ruas Brancas Verticais) -->
                             <path d="M 50,0 L 50,480" stroke="#ffffff" stroke-width="16" />
                             <path d="M 150,0 L 150,480" stroke="#ffffff" stroke-width="16" />
                             <path d="M 250,0 L 250,480" stroke="#ffffff" stroke-width="16" />
 
-                            <!-- ZONA DE ALAGAMENTO (AVENIDA CENTRAL BLOQUEADA) -->
                             <circle cx="150" cy="230" r="28" class="flood-hazard-zone" />
                             <circle cx="150" cy="230" r="14" fill="#ef4444" opacity="0.8" />
 
-                            <!-- Caminho Original Bloqueado (Tracejado Vermelho) -->
-                            <path d="M 150,270 L 150,190" stroke="#ef4444" stroke-width="4" stroke-dasharray="4,4"
-                                fill="none" />
+                            <path d="M 150,270 L 150,190" stroke="#ef4444" stroke-width="4" stroke-dasharray="4,4" fill="none" />
 
-                            <!-- Ícone Alerta de Bloqueio (Centralizado na Zona) -->
                             <g transform="translate(143, 223)">
                                 <path d="M 7,0 L 14,14 L 0,14 Z" fill="#ffffff" />
                                 <rect x="6" y="5" width="2" height="5" fill="#ef4444" />
                                 <rect x="6" y="11" width="2" height="2" fill="#ef4444" />
                             </g>
 
-                            <!-- ROTA SECA COM DESVIO (LINHA AZUL ANIMADA) -->
                             <path class="route-line" d="M 150,350 L 250,350 L 250,110 L 150,110" fill="none" />
 
-                            <!-- Marcador de Origem (Você) - Exatamente uma rua antes -->
                             <circle cx="150" cy="350" r="12" class="marker-user-pulse" />
                             <circle cx="150" cy="350" r="6" fill="#2563eb" />
 
-                            <!-- Marcador de Destino - Exatamente uma rua depois -->
                             <g transform="translate(140, 86)">
-                                <path
-                                    d="M 10,0 C 4.5,0 0,4.5 0,10 C 0,17 10,24 10,24 C 10,24 20,17 20,10 C 20,4.5 15.5,0 10,0 Z"
-                                    fill="#1b365d" />
+                                <path d="M 10,0 C 4.5,0 0,4.5 0,10 C 0,17 10,24 10,24 C 10,24 20,17 20,10 C 20,4.5 15.5,0 10,0 Z" fill="#1b365d" />
                                 <circle cx="10" cy="9" r="4" fill="#ffffff" />
                             </g>
                         </svg>
@@ -294,6 +276,74 @@
         </div>
     </section>
 
+    <!-- SECÇÃO PROCESSO DA MAQUETE -->
+    <section class="maquete-section" id="processo-maquete">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Processo da Maquete</h2>
+                <p>Acompanhe a evolução da nossa maquete física passo a passo.</p>
+            </div>
+            
+            <div class="maquete-carousel-wrapper">
+                <div class="maquete-card-horizontal">
+                    <!-- Lado da Imagem -->
+                    <div class="maquete-img-side">
+                        <img id="maquete-img" src="inicio.webp" alt="Etapa da Maquete">
+                        
+                        <button class="carousel-btn left-btn" onclick="mudarEtapa(-1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn right-btn" onclick="mudarEtapa(1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Bolinhas de navegação -->
+                        <div class="carousel-dots" id="dots-container">
+                            <span class="dot active" onclick="irParaEtapa(0)"></span>
+                            <span class="dot" onclick="irParaEtapa(1)"></span>
+                            <span class="dot" onclick="irParaEtapa(2)"></span>
+                            <span class="dot" onclick="irParaEtapa(3)"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Lado do Texto (Lista estilo Acordeão/Tabela) -->
+                    <div class="maquete-text-side">
+                        <div class="maquete-steps-list">
+                            <div class="maquete-step-item active" id="step-0" onclick="irParaEtapa(0)">
+                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                                <div class="step-content">
+                                    <h4>Início</h4>
+                                    <p>Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base.</p>
+                                </div>
+                            </div>
+                            <div class="maquete-step-item" id="step-1" onclick="irParaEtapa(1)">
+                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                                <div class="step-content">
+                                    <h4>Meio</h4>
+                                    <p>Pintura base inicial, texturização do terreno e demarcação das áreas por onde a água vai passar.</p>
+                                </div>
+                            </div>
+                            <div class="maquete-step-item" id="step-2" onclick="irParaEtapa(2)">
+                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                                <div class="step-content">
+                                    <h4>Meio 2</h4>
+                                    <p>Adição de texturas detalhadas, aplicação de musgos e aprimoramento das cores do rio.</p>
+                                </div>
+                            </div>
+                            <div class="maquete-step-item" id="step-3" onclick="irParaEtapa(3)">
+                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                                <div class="step-content">
+                                    <h4>Fim</h4>
+                                    <p>Finalização da maquete com a cobertura completa de vegetação e acabamentos reais do terreno.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SEÇÃO EQUIPE -->
     <section class="team-section" id="equipe">
         <div class="section-container">
@@ -303,7 +353,6 @@
             </div>
 
             <div class="team-row">
-                <!-- RYAN -->
                 <div class="team-card">
                     <div class="team-photo">
                         <img src="ryan.jpg" alt="Foto do Ryan"
@@ -317,7 +366,6 @@
                     </div>
                 </div>
 
-                <!-- RAFAELA -->
                 <div class="team-card">
                     <div class="team-photo">
                         <img src="rafa.jpg" alt="Foto da Rafaela"
@@ -331,7 +379,6 @@
                     </div>
                 </div>
 
-                <!-- NATHAN -->
                 <div class="team-card">
                     <div class="team-photo">
                         <img src="nathan.jpg" alt="Foto do Nathan"
@@ -345,7 +392,6 @@
                     </div>
                 </div>
 
-                <!-- STELLA -->
                 <div class="team-card">
                     <div class="team-photo">
                         <img src="stella.jpg" alt="Foto da Stella"
