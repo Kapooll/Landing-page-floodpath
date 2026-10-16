@@ -21,6 +21,13 @@
 
 body {
     background-color: var(--bg-light);
+    background-image: 
+        radial-gradient(circle at 100% 120%, rgba(37, 99, 235, 0.05) 20%, transparent 21%),
+        radial-gradient(circle at 0% 40%, rgba(37, 99, 235, 0.05) 25%, transparent 26%),
+        radial-gradient(rgba(27, 54, 93, 0.06) 1.5px, transparent 1.5px);
+    background-size: 100% 100%, 100% 100%, 28px 28px;
+    background-attachment: fixed;
+    
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
@@ -34,7 +41,9 @@ body {
 }
 
 .main-header {
-    background-color: var(--navy-blue);
+    background: linear-gradient(-45deg, var(--navy-blue), #0f2040, #1d4ed8, var(--navy-blue));
+    background-size: 400% 400%;
+    animation: gradientFlow 10s ease infinite;
     padding: 1rem 2rem;
     border-radius: 18px;
     display: flex;
@@ -43,9 +52,12 @@ body {
     box-shadow: 0 10px 25px rgba(27, 54, 93, 0.2);
 }
 
-/* =========================================================================
-   AJUSTE DA LOGO
-   ========================================================================= */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: 900;
@@ -54,7 +66,7 @@ body {
     display: inline-flex;
     align-items: center;
     line-height: 1;
-    gap: 8px; /* Espaço entre a gota e o texto */
+    gap: 8px;
 }
 
 .logo-img {
@@ -63,15 +75,14 @@ body {
     object-fit: contain;
     border-radius: 50%;
     display: block;
-    transform: translateY(-2px); /* Puxa a gota para cima, alinhando o texto ao centro/baixo da gota */
+    transform: translateY(-2px);
 }
 
 .logo span {
     color: var(--light-blue);
-    margin-left: -7px; /* Puxa a palavra PATH para ficar colada no FLOOD */
+    margin-left: -7px;
 }
 
-/* O resto do código permanece igual */
 .nav-links {
     display: flex;
     align-items: center;
@@ -172,6 +183,7 @@ body {
 .hero-mockup-wrapper {
     display: flex;
     justify-content: center;
+    perspective: 1000px;
 }
 
 .phone-frame {
@@ -183,6 +195,8 @@ body {
     box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
     position: relative;
     border: 4px solid #334155;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
 }
 
 .dynamic-island {
@@ -398,6 +412,7 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     margin-bottom: 20px;
+    transition: 0.3s ease;
 }
 
 .feature-card h3 {
@@ -454,10 +469,6 @@ body {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
-
-/* =========================================================================
-   ESTILIZAÇÃO DAS DÚVIDAS FREQUENTES (FAQ)
-   ========================================================================= */
 
 .faq {
     padding: 60px 20px;
@@ -530,8 +541,202 @@ body {
 }
 
 /* =========================================================================
-   SEÇÃO EQUIPE
+   SECÇÃO PROCESSO DA MAQUETE (COM LISTA EMPILHADA E BOLINHAS)
    ========================================================================= */
+.maquete-section {
+    padding: 60px 20px;
+    background: var(--bg-light);
+}
+
+.maquete-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.maquete-card-horizontal {
+    display: flex;
+    flex-direction: row;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 15px 40px -5px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    min-height: 500px;
+    overflow: hidden; 
+}
+
+/* Lado da Imagem */
+.maquete-img-side {
+    flex: 1.2;
+    background: #1e293b;
+    position: relative;
+}
+
+.maquete-img-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Botões Laterais */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--navy-blue);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.left-btn { left: 20px; }
+.right-btn { right: 20px; }
+
+/* Bolinhas (Dots) */
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.dot.active {
+    background: var(--white);
+    transform: scale(1.3);
+}
+
+/* Lado do Texto (Lista) */
+.maquete-text-side {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    background: var(--navy-blue); /* Fundo escuro para contrastar como na imagem */
+}
+
+.maquete-steps-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.maquete-step-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.maquete-step-item:last-child {
+    border-bottom: none;
+}
+
+.maquete-step-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.8;
+}
+
+.maquete-step-item.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--action-blue);
+}
+
+.step-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    margin-right: 20px;
+    transition: all 0.3s ease;
+}
+
+.maquete-step-item.active .step-icon {
+    background: var(--action-blue);
+    border-color: var(--action-blue);
+    transform: rotate(45deg); /* Dá um estilo dinâmico à seta */
+}
+
+.step-content h4 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.step-content p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .maquete-card-horizontal {
+        flex-direction: column; 
+    }
+    .maquete-img-side {
+        aspect-ratio: 16 / 10;
+        position: relative;
+    }
+    .maquete-img-side img {
+        position: absolute;
+    }
+    .maquete-step-item {
+        padding: 15px 20px;
+    }
+}
 
 .team-section {
     padding: 80px 20px;
@@ -653,10 +858,6 @@ body {
     margin-top: 10px;
 }
 
-/* =========================================================================
-   RODAPÉ E RESPONSIVIDADE
-   ========================================================================= */
-
 .main-footer {
     background: var(--dark-slate);
     color: var(--white);
@@ -702,10 +903,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* =========================================================================
-   ESTILIZAÇÃO DOS BOTÕES
-   ========================================================================= */
-
 .btn-acessar-sistema {
     background-color: var(--action-blue);
     color: var(--white) !important;
@@ -744,6 +941,29 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 12px 25px rgba(37, 99, 235, 0.4);
     color: var(--white);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-card:nth-child(3):hover .feature-icon {
+    background-color: #fee2e2;
+    color: var(--emergency-red);
+    animation: pulseAlert 1s infinite;
+}
+
+@keyframes pulseAlert {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
 @media (max-width: 1024px) {
