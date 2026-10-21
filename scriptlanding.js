@@ -63,6 +63,25 @@ const imagensMaquete = [
     "fim.webp"
 ];
 
+const descricoesMaquete = [
+    {
+        titulo: "Início",
+        texto: "Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base."
+    },
+    {
+        titulo: "Meio",
+        texto: "Pintura base inicial, texturização do terreno e demarcação das áreas por onde a água vai passar."
+    },
+    {
+        titulo: "Meio 2",
+        texto: "Adição de texturas detalhadas, aplicação de musgos e aprimoramento das cores do rio."
+    },
+    {
+        titulo: "Fim",
+        texto: "Finalização da maquete com a cobertura completa de vegetação e acabamentos reais do terreno."
+    }
+];
+
 let etapaAtual = 0;
 let carrosselTimer;
 const TEMPO_AUTOMATICO = 5000;
@@ -89,16 +108,17 @@ window.mudarEtapa = function(direcao) {
 function atualizarCarrossel() {
     const imgElement = document.getElementById("maquete-img");
     const dots = document.querySelectorAll(".dot");
-    const stepItems = document.querySelectorAll(".maquete-step-item");
+    const tituloElement = document.getElementById("maquete-title");
+    const descricaoElement = document.getElementById("maquete-description");
 
-    // Efeito de transição na imagem
+    if (!imgElement || !tituloElement || !descricaoElement) return;
+
     imgElement.style.opacity = 0;
     setTimeout(() => {
         imgElement.src = imagensMaquete[etapaAtual];
         imgElement.style.opacity = 1;
     }, 200);
 
-    // Atualizar as bolinhas
     dots.forEach((dot, index) => {
         if (index === etapaAtual) {
             dot.classList.add("active");
@@ -107,14 +127,9 @@ function atualizarCarrossel() {
         }
     });
 
-    // Atualizar a lista lateral
-    stepItems.forEach((item, index) => {
-        if (index === etapaAtual) {
-            item.classList.add("active");
-        } else {
-            item.classList.remove("active");
-        }
-    });
+    const etapaAtualDados = descricoesMaquete[etapaAtual];
+    tituloElement.textContent = etapaAtualDados.titulo;
+    descricaoElement.textContent = etapaAtualDados.texto;
 }
 
 function iniciarCarrosselAutomatico() {

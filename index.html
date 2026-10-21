@@ -29,6 +29,7 @@
                 <a href="#solucao">Como Funciona</a>
                 <a href="#beneficios">Recursos</a>
                 <a href="#faq">Dúvidas</a>
+                <a href="#problema-sao-carlos">Casos Reais</a>
                 <a href="#processo-maquete">Maquete</a>
                 <a href="#equipe">Equipe</a>
             </nav>
@@ -276,6 +277,23 @@
         </div>
     </section>
 
+    <!-- SEÇÃO CASOS REAIS -->
+    <section class="casos-reais-section" id="problema-sao-carlos">
+        <div class="casos-reais-container">
+            <h3 class="casos-reais-titulo">O problema de São Carlos</h3>
+
+            <div class="casos-reais-grid">
+                <div class="casos-reais-card casos-reais-imagem-principal">
+                    <img src="casosreais.png" alt="Casos reais de enchentes em São Carlos">
+                </div>
+
+                <div class="casos-reais-card casos-reais-imagem-secundaria">
+                    <img src="1ptareas.png" alt="Mapa de áreas de risco em São Carlos">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SECÇÃO PROCESSO DA MAQUETE -->
     <section class="maquete-section" id="processo-maquete">
         <div class="section-container">
@@ -283,60 +301,29 @@
                 <h2>Processo da Maquete</h2>
                 <p>Acompanhe a evolução da nossa maquete física passo a passo.</p>
             </div>
-            
+
             <div class="maquete-carousel-wrapper">
-                <div class="maquete-card-horizontal">
-                    <!-- Lado da Imagem -->
+                <div class="maquete-card">
                     <div class="maquete-img-side">
                         <img id="maquete-img" src="inicio.webp" alt="Etapa da Maquete">
-                        
-                        <button class="carousel-btn left-btn" onclick="mudarEtapa(-1)">
+
+                        <button class="carousel-btn left-btn" onclick="mudarEtapa(-1)" aria-label="Voltar imagem">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
-                        <button class="carousel-btn right-btn" onclick="mudarEtapa(1)">
+                        <button class="carousel-btn right-btn" onclick="mudarEtapa(1)" aria-label="Próxima imagem">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
 
-                        <!-- Bolinhas de navegação -->
                         <div class="carousel-dots" id="dots-container">
                             <span class="dot active" onclick="irParaEtapa(0)"></span>
                             <span class="dot" onclick="irParaEtapa(1)"></span>
                             <span class="dot" onclick="irParaEtapa(2)"></span>
                             <span class="dot" onclick="irParaEtapa(3)"></span>
                         </div>
-                    </div>
-                    
-                    <!-- Lado do Texto (Lista estilo Acordeão/Tabela) -->
-                    <div class="maquete-text-side">
-                        <div class="maquete-steps-list">
-                            <div class="maquete-step-item active" id="step-0" onclick="irParaEtapa(0)">
-                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
-                                <div class="step-content">
-                                    <h4>Início</h4>
-                                    <p>Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base.</p>
-                                </div>
-                            </div>
-                            <div class="maquete-step-item" id="step-1" onclick="irParaEtapa(1)">
-                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
-                                <div class="step-content">
-                                    <h4>Meio</h4>
-                                    <p>Pintura base inicial, texturização do terreno e demarcação das áreas por onde a água vai passar.</p>
-                                </div>
-                            </div>
-                            <div class="maquete-step-item" id="step-2" onclick="irParaEtapa(2)">
-                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
-                                <div class="step-content">
-                                    <h4>Meio 2</h4>
-                                    <p>Adição de texturas detalhadas, aplicação de musgos e aprimoramento das cores do rio.</p>
-                                </div>
-                            </div>
-                            <div class="maquete-step-item" id="step-3" onclick="irParaEtapa(3)">
-                                <div class="step-icon"><i class="fa-solid fa-arrow-right"></i></div>
-                                <div class="step-content">
-                                    <h4>Fim</h4>
-                                    <p>Finalização da maquete com a cobertura completa de vegetação e acabamentos reais do terreno.</p>
-                                </div>
-                            </div>
+
+                        <div class="maquete-caption">
+                            <h3 id="maquete-title">Início</h3>
+                            <p id="maquete-description">Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base.</p>
                         </div>
                     </div>
                 </div>
