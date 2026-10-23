@@ -188,7 +188,9 @@ button {
     font-weight: 700;
     line-height: 1.2;
     text-decoration: none;
-    transition: background-color .2s, transform .2s
+    transition: background-color .22s, transform .22s, box-shadow .22s, filter .22s;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn svg {
@@ -198,11 +200,16 @@ button {
 
 .btn-primario {
     background: var(--rota);
-    color: #fff
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(36, 87, 214, .25);
+    animation: ctaPulse 3.2s ease-in-out infinite;
 }
 
 .btn-primario:hover {
-    background: var(--rota-esc)
+    background: var(--rota-esc);
+    box-shadow: 0 17px 30px rgba(36, 87, 214, .35);
+    filter: brightness(1.05);
+    transform: translateY(-2px);
 }
 
 .btn-primario:active {
@@ -306,14 +313,16 @@ button {
 .hero h1 {
     font-size: clamp(3rem, 7.2vw, 6rem);
     line-height: .94;
-    color: var(--asfalto)
+    color: var(--asfalto);
+    animation: headlineReveal 0.9s cubic-bezier(.22,1,.36,1) both;
 }
 
 .hero-lead {
     max-width: 48ch;
     margin: 1.5rem 0 2rem;
     font-size: 1.2rem;
-    color: var(--suave)
+    color: var(--suave);
+    animation: fadeUp 1s ease-out 0.15s both;
 }
 
 .hero-lead strong {
@@ -324,7 +333,8 @@ button {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 1.75rem
+    gap: 1rem 1.75rem;
+    animation: fadeUp 1s ease-out 0.25s both;
 }
 
 .hero-fatos {
@@ -334,6 +344,18 @@ button {
     margin-top: 2.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--linha)
+}
+
+.hero-fatos li {
+    animation: fadeUp 0.8s ease-out both;
+}
+
+.hero-fatos li:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.hero-fatos li:nth-child(3) {
+    animation-delay: 0.2s;
 }
 
 .hero-fatos li {
@@ -354,7 +376,8 @@ button {
 .hero-visual {
     display: flex;
     justify-content: center;
-    perspective: 1200px
+    perspective: 1200px;
+    animation: heroFloat 7s ease-in-out infinite alternate;
 }
 
 .phone-frame,
@@ -369,6 +392,19 @@ button {
     transform-style: preserve-3d;
     transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
     will-change: transform
+}
+
+.phone-frame::after,
+.celular::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50px;
+    background: radial-gradient(circle, rgba(36, 87, 214, 0.28), transparent 72%);
+    filter: blur(18px);
+    z-index: -1;
+    opacity: .9;
+    animation: haloPulse 5s ease-in-out infinite alternate;
 }
 
 .dynamic-island,
@@ -391,7 +427,8 @@ button {
     height: 100%;
     overflow: hidden;
     border-radius: 34px;
-    background: #DCE4EB
+    background: #DCE4EB;
+    animation: screenFloat 6s ease-in-out infinite alternate;
 }
 
 .mapa-svg,
@@ -522,6 +559,18 @@ button {
     animation: usuario 1.8s ease-out infinite
 }
 
+.flood-hazard-zone {
+    animation: hazardPulse 2.8s ease-in-out infinite;
+    transform-origin: center;
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.4));
+}
+
+.marker-user-pulse {
+    animation: markerPulse 1.8s ease-out infinite;
+    transform-origin: center;
+    fill: rgba(36, 87, 214, 0.22);
+}
+
 .route-line {
     fill: none;
     stroke: var(--rota);
@@ -531,7 +580,8 @@ button {
     stroke-dasharray: 18 16;
     stroke-dashoffset: 0;
     opacity: 1;
-    animation: drawRoute 2.8s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(36, 87, 214, 0.35));
+    animation: drawRoute 2.8s linear infinite, routeGlow 2.8s ease-in-out infinite;
 }
 
 @keyframes alagar {
@@ -557,6 +607,149 @@ button {
     100% {
         transform: scale(2.4);
         opacity: 0
+    }
+}
+
+@keyframes heroFloat {
+    0% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes screenFloat {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes haloPulse {
+    0% {
+        opacity: 0.45;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes hazardPulse {
+    0%,
+    100% {
+        transform: scale(0.98);
+        opacity: .75;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+}
+
+@keyframes markerPulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.7);
+        opacity: 0;
+    }
+}
+
+@keyframes routeGlow {
+    0%,
+    100% {
+        opacity: .8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes headlineReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cardReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ctaPulse {
+    0%,
+    100% {
+        box-shadow: 0 12px 24px rgba(36, 87, 214, .25);
+    }
+
+    50% {
+        box-shadow: 0 14px 28px rgba(36, 87, 214, .38);
+    }
+}
+
+@keyframes overlayRise {
+    0% {
+        clip-path: inset(100% 0 0 0 round 22px);
+        opacity: 0.2;
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0 round 22px);
+        opacity: 1;
+    }
+}
+
+@keyframes infoContentRise {
+    0% {
+        opacity: 0;
+        transform: translateY(34px) scale(0.98);
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -938,12 +1131,29 @@ button {
     background: #ffffff;
     box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
     border: 1px solid var(--linha);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.45s cubic-bezier(.22, 1, .36, 1), box-shadow 0.45s ease;
+    isolation: isolate;
 }
 
 .team-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 30px rgba(27, 54, 93, 0.18);
+    transform: none;
+    box-shadow: 0 18px 34px rgba(27, 54, 93, 0.18);
+}
+
+.team-card {
+    animation: cardReveal 0.8s ease-out both;
+}
+
+.team-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.team-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+.team-card:nth-child(4) {
+    animation-delay: 0.24s;
 }
 
 .team-photo {
@@ -952,6 +1162,7 @@ button {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 .team-photo img {
@@ -961,19 +1172,28 @@ button {
     object-position: center;
     filter: none !important;
     opacity: 1 !important;
-    transition: transform 0.4s ease;
+    transition: transform 0.45s ease, filter 0.4s ease;
+    will-change: transform;
+}
+
+.team-card:hover .team-photo {
+    transform: none;
+    transition: transform 0.5s cubic-bezier(.22, 1, .36, 1);
 }
 
 .team-card:hover .team-photo img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+    filter: saturate(1.25) contrast(1.08) brightness(0.8);
+}
+
+.team-card:hover .team-info {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 
 .team-info {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
+    inset: auto 0 0 0;
+    padding: 12px 14px 14px;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(4px);
     color: var(--asfalto);
@@ -982,17 +1202,25 @@ button {
     justify-content: flex-end;
     align-items: center;
     text-align: center;
-    transition: all 0.3s ease;
-    min-height: 120px;
-    height: auto;
+    transition: all 0.45s cubic-bezier(.22, 1, .36, 1);
+    min-height: 96px;
+    height: 96px;
+    transform: translateY(0);
+    z-index: 2;
+    overflow: hidden;
 }
 
 .team-card:hover .team-info {
-    background: rgba(15, 23, 42, 0.92);
+    background: rgba(15, 23, 42, 0.96);
     color: #fff;
+    inset: 0;
+    height: 100%;
     min-height: 100%;
     justify-content: center;
-    padding: 20px;
+    padding: 28px 22px 30px;
+    transform: translateY(0);
+    box-shadow: 0 0 0 rgba(15, 23, 42, 0);
+    animation: overlayRise 0.5s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .team-card h3 {
@@ -1024,8 +1252,8 @@ button {
     line-height: 1.45;
     opacity: 0;
     max-height: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+    transform: translateY(28px);
+    transition: opacity 0.46s ease, transform 0.46s ease, max-height 0.46s ease;
     margin: 0;
     overflow: hidden;
 }
@@ -1037,8 +1265,8 @@ button {
     flex-wrap: wrap;
     opacity: 0;
     max-height: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+    transform: translateY(30px);
+    transition: opacity 0.46s ease, transform 0.46s ease, max-height 0.46s ease;
     overflow: hidden;
     margin-top: 0;
 }
@@ -1071,7 +1299,9 @@ button {
     opacity: 1;
     max-height: 240px;
     transform: translateY(0);
-    margin-top: 10px;
+    margin-top: 12px;
+    transition-delay: 0.08s;
+    animation: infoContentRise 0.7s cubic-bezier(.17, .84, .44, 1) both;
 }
 
 /* Equipe */
