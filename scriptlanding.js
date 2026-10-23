@@ -1,35 +1,27 @@
-// =================================================================
-// CONFIGURAÇÃO DO LINK DO PROJETO EM FUNCIONAMENTO
-// =================================================================
-const LINK_DO_PROJETO = "http://rafaela0011.github.io/FloodPathAtualizadoOutubro/";
+// Link do sistema em funcionamento (atualiza todos os botões .link-sistema)
+const LINK_DO_PROJETO = "https://rafaela0011.github.io/FloodPathAtualizadoOutubro/";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Funcionalidade do Acordeão FAQ
-    const faqQuestions = document.querySelectorAll('.faq-question');
+const ETAPAS = [
+    { imagem: "inicio.webp", titulo: "Base e relevo", texto: "Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base.", alt: "Início da maquete: base de madeira com terra, massa azul modelando o relevo e uma ilha circular ao centro" },
+    { imagem: "meio.webp", titulo: "Pintura e canal", texto: "Pintura base inicial, texturização do terreno e demarcação das áreas por onde a água vai passar.", alt: "Maquete pintada de verde e preto, com o canal de água em branco e uma ilha de espuma ao centro" },
+    { imagem: "meio2.webp", titulo: "Texturas e rio", texto: "Adição de texturas detalhadas, aplicação de musgos e aprimoramento das cores do rio.", alt: "Maquete com o rio pintado de azul, margens cobertas de musgo e uma ilha de musgo verde ao centro" },
+    { imagem: "fim.webp", titulo: "Vegetação e acabamento", texto: "Finalização da maquete com a cobertura completa de vegetação e acabamentos reais do terreno.", alt: "Vista de cima da maquete finalizada, com musgo cobrindo o terreno, rio escuro e duas pontes pretas" }
+];
 
-    faqQuestions.forEach(button => {
-        button.addEventListener('click', () => {
-            const faqItem = button.parentElement;
-            faqItem.classList.toggle('active');
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".link-sistema").forEach(a => {
+        a.href = LINK_DO_PROJETO;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
     });
 
-    // 2. Atualização automática dos botões para o link configurado
-    const botoesProjeto = document.querySelectorAll('.link-sistema');
-    botoesProjeto.forEach(botao => {
-        botao.href = LINK_DO_PROJETO;
-        botao.target = "_blank";
-    });
-
-    // 3. Efeito de revelar ao rolar (Scroll Reveal)
-    const reveals = document.querySelectorAll('.feature-card, .step-card, .team-card');
-    
-    reveals.forEach(el => el.classList.add('reveal'));
+    const reveals = document.querySelectorAll(".feature-card, .step-card, .team-card");
+    reveals.forEach(el => el.classList.add("reveal"));
 
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                entry.target.classList.add("active");
                 observer.unobserve(entry.target);
             }
         });
@@ -37,108 +29,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveals.forEach(el => revealOnScroll.observe(el));
 
-    // 4. Efeito Parallax no Mockup do Celular
-    const phoneFrame = document.querySelector('.phone-frame');
-    
-    document.addEventListener('mousemove', (e) => {
-        if (!phoneFrame) return;
-        
-        const xAxis = (e.clientX - window.innerWidth / 2) / 25; 
-        const yAxis = (e.clientY - window.innerHeight / 2) / -25;
-        
-        phoneFrame.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
+    const phoneFrame = document.querySelector(".phone-frame") || document.querySelector(".celular");
+    if (phoneFrame) {
+        let targetX = 0;
+        let targetY = 0;
+        let currentX = 0;
+        let currentY = 0;
 
-    // 5. Inicia o carrossel automático da maquete
-    iniciarCarrosselAutomatico();
+        const animatePhone = () => {
+            currentX += (targetX - currentX) * 0.08;
+            currentY += (targetY - currentY) * 0.08;
+            phoneFrame.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
+            requestAnimationFrame(animatePhone);
+        };
+
+        document.addEventListener("mousemove", (e) => {
+            targetX = (e.clientX - window.innerWidth / 2) / 28;
+            targetY = (e.clientY - window.innerHeight / 2) / -28;
+        });
+
+        requestAnimationFrame(animatePhone);
+    }
+
+    iniciarRegua();
+    iniciarModal();
+    iniciarMaquete();
 });
 
-// =================================================================
-// LÓGICA DO CARROSSEL DA MAQUETE (AUTOMÁTICO E MANUAL)
-// =================================================================
-const imagensMaquete = [
-    "inicio.webp",
-    "meio.webp",
-    "meio2.webp",
-    "fim.webp"
-];
+// A régua de nível sobe conforme a página é lida
+function iniciarRegua() {
+    const raiz = document.documentElement;
+    let agendado = false;
+    const atualizar = () => {
+        const max = raiz.scrollHeight - window.innerHeight;
+        const nivel = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        raiz.style.setProperty("--nivel", nivel.toFixed(3));
+        agendado = false;
+    };
+    window.addEventListener("scroll", () => {
+        if (!agendado) { agendado = true; requestAnimationFrame(atualizar); }
+    }, { passive: true });
+    window.addEventListener("resize", atualizar);
+    atualizar();
+}
 
-const descricoesMaquete = [
-    {
-        titulo: "Início",
-        texto: "Preparação da base, modelagem do relevo e delimitação inicial do espaço utilizando massa e materiais base."
-    },
-    {
-        titulo: "Meio",
-        texto: "Pintura base inicial, texturização do terreno e demarcação das áreas por onde a água vai passar."
-    },
-    {
-        titulo: "Meio 2",
-        texto: "Adição de texturas detalhadas, aplicação de musgos e aprimoramento das cores do rio."
-    },
-    {
-        titulo: "Fim",
-        texto: "Finalização da maquete com a cobertura completa de vegetação e acabamentos reais do terreno."
-    }
-];
+// Ampliar imagens (casos reais e maquete)
+function iniciarModal() {
+    const modal = document.getElementById("modal-imagem");
+    const img = document.getElementById("modal-img");
+    if (!modal || !img || !modal.showModal) return;
 
-let etapaAtual = 0;
-let carrosselTimer;
-const TEMPO_AUTOMATICO = 5000;
-
-window.irParaEtapa = function(index) {
-    etapaAtual = index;
-    atualizarCarrossel();
-    resetarTimerCarrossel();
-};
-
-window.mudarEtapa = function(direcao) {
-    etapaAtual += direcao;
-
-    if (etapaAtual >= imagensMaquete.length) {
-        etapaAtual = 0;
-    } else if (etapaAtual < 0) {
-        etapaAtual = imagensMaquete.length - 1;
-    }
-
-    atualizarCarrossel();
-    resetarTimerCarrossel();
-};
-
-function atualizarCarrossel() {
-    const imgElement = document.getElementById("maquete-img");
-    const dots = document.querySelectorAll(".dot");
-    const tituloElement = document.getElementById("maquete-title");
-    const descricaoElement = document.getElementById("maquete-description");
-
-    if (!imgElement || !tituloElement || !descricaoElement) return;
-
-    imgElement.style.opacity = 0;
-    setTimeout(() => {
-        imgElement.src = imagensMaquete[etapaAtual];
-        imgElement.style.opacity = 1;
-    }, 200);
-
-    dots.forEach((dot, index) => {
-        if (index === etapaAtual) {
-            dot.classList.add("active");
-        } else {
-            dot.classList.remove("active");
-        }
+    document.addEventListener("click", e => {
+        const gatilho = e.target.closest(".ampliar");
+        const origem = gatilho && gatilho.querySelector("img");
+        if (!origem) return;
+        img.src = origem.currentSrc || origem.src;
+        img.alt = origem.alt;
+        modal.showModal();
     });
-
-    const etapaAtualDados = descricoesMaquete[etapaAtual];
-    tituloElement.textContent = etapaAtualDados.titulo;
-    descricaoElement.textContent = etapaAtualDados.texto;
+    modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+    modal.querySelector(".modal-fechar").addEventListener("click", () => modal.close());
 }
 
-function iniciarCarrosselAutomatico() {
-    carrosselTimer = setInterval(() => {
-        mudarEtapa(1);
-    }, TEMPO_AUTOMATICO);
-}
+// Etapas da maquete (manual: setas e lista de etapas)
+function iniciarMaquete() {
+    const img = document.getElementById("maquete-img");
+    const titulo = document.getElementById("maquete-title");
+    const texto = document.getElementById("maquete-description");
+    const botoes = [...document.querySelectorAll(".etapa")];
+    if (!img || !titulo || !texto) return;
 
-function resetarTimerCarrossel() {
-    clearInterval(carrosselTimer);
-    iniciarCarrosselAutomatico();
+    let atual = 0;
+    let troca;
+    ETAPAS.forEach(e => { new Image().src = e.imagem; });
+
+    function mostrar(i) {
+        atual = (i + ETAPAS.length) % ETAPAS.length;
+        const etapa = ETAPAS[atual];
+        img.style.opacity = 0;
+        clearTimeout(troca);
+        troca = setTimeout(() => {
+            img.src = etapa.imagem;
+            img.alt = etapa.alt;
+            img.style.opacity = 1;
+        }, 180);
+        botoes.forEach((b, n) => b.setAttribute("aria-current", n === atual ? "true" : "false"));
+        titulo.textContent = etapa.titulo;
+        texto.textContent = etapa.texto;
+    }
+
+    document.querySelector(".seta-esq").addEventListener("click", () => mostrar(atual - 1));
+    document.querySelector(".seta-dir").addEventListener("click", () => mostrar(atual + 1));
+    botoes.forEach((b, n) => b.addEventListener("click", () => mostrar(n)));
 }
