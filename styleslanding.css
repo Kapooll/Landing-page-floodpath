@@ -314,7 +314,7 @@ button {
     font-size: clamp(3rem, 7.2vw, 6rem);
     line-height: .94;
     color: var(--asfalto);
-    animation: headlineReveal 0.9s cubic-bezier(.22,1,.36,1) both;
+    animation: headlineReveal 0.9s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .hero-lead {
@@ -643,6 +643,7 @@ button {
 }
 
 @keyframes hazardPulse {
+
     0%,
     100% {
         transform: scale(0.98);
@@ -668,6 +669,7 @@ button {
 }
 
 @keyframes routeGlow {
+
     0%,
     100% {
         opacity: .8;
@@ -715,6 +717,7 @@ button {
 }
 
 @keyframes ctaPulse {
+
     0%,
     100% {
         box-shadow: 0 12px 24px rgba(36, 87, 214, .25);
@@ -1187,7 +1190,7 @@ button {
 }
 
 .team-card:hover .team-info {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .team-info {
