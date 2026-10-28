@@ -81,7 +81,13 @@ function iniciarModal() {
 
     document.addEventListener("click", e => {
         const gatilho = e.target.closest(".ampliar");
-        const origem = gatilho && gatilho.querySelector("img");
+        if (!gatilho) return;
+
+        if (gatilho.tagName.toLowerCase() === "a") {
+            return;
+        }
+
+        const origem = gatilho.querySelector("img");
         if (!origem) return;
         img.src = origem.currentSrc || origem.src;
         img.alt = origem.alt;

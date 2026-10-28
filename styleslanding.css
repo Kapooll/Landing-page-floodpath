@@ -1508,3 +1508,28 @@ button {
         stroke-dashoffset: 0
     }
 }
+
+.titulo-link {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.titulo-link:hover,
+.titulo-link:focus-visible {
+    color: #0f5d9d;
+    text-decoration: underline;
+}
+
+.relatorio .titulo-link {
+    margin-bottom: 0.8rem;
+}
+
+.recortes figcaption .titulo-link {
+    display: block;
+    margin-bottom: 0.45rem;
+}
