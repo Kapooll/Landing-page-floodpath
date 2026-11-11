@@ -278,6 +278,16 @@ button {
     border-top: 2px solid var(--rota)
 }
 
+@media (max-width:760px) {
+    .regua {
+        display: block;
+        width: 20px;
+        height: 200px;
+        right: 8px;
+        padding: 8px 6px;
+    }
+}
+
 @media (min-width:1360px) {
     .regua {
         display: block

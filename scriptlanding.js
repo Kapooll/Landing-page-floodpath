@@ -9,6 +9,18 @@ const ETAPAS = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+    const marca = document.querySelector(".marca");
+    if (marca) {
+        marca.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+            if (window.location.hash) {
+                history.replaceState(null, "", window.location.pathname + window.location.search);
+            }
+            window.location.reload();
+        });
+    }
+
     document.querySelectorAll(".link-sistema").forEach(a => {
         a.href = LINK_DO_PROJETO;
         a.target = "_blank";
